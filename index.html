@@ -7,46 +7,45 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <h1>💳 Real-Time Receipt Splitter & UPI Generator</h1>
+        <p class="subtitle">Split bills instantly and generate UPI payment links.</p>
 
-<header>
-    <h1>💳 Real-Time Receipt Splitter & UPI Generator</h1>
-    <p>Split bills instantly and generate UPI payment links.</p>
-</header>
+        <div class="main-layout">
+            <!-- Left Card: Receipt Details -->
+            <div class="card">
+                <h2>Receipt Details</h2>
+                <div class="form-group">
+                    <label>Total Bill Amount (₹)</label>
+                    <input type="number" id="totalAmount" placeholder="Enter total bill">
+                </div>
+                <div class="form-group">
+                    <label>Number of People</label>
+                    <input type="number" id="peopleCount" placeholder="Enter number of people">
+                </div>
+                <button id="splitBtn">Split Bill</button>
+                <h3 id="result" style="margin-top: 15px; color: #2e7d32;"></h3>
+            </div>
 
-<div class="container">
-
-    <div class="card">
-        <h2>Receipt Details</h2>
-
-        <label>Total Bill Amount (₹)</label>
-        <input type="number" id="billAmount" placeholder="Enter total bill">
-
-        <label>Number of People</label>
-        <input type="number" id="people" placeholder="Enter number of people">
-
-        <button onclick="splitBill()">Split Bill</button>
-
-        <h3 id="result"></h3>
+            <!-- Right Card: UPI Generator -->
+            <div class="card">
+                <h2>UPI Generator</h2>
+                <div class="form-group">
+                    <label>UPI ID</label>
+                    <input type="text" id="upiId" placeholder="example@upi">
+                </div>
+                <button id="generateUpiBtn">Generate UPI Link & QR</button>
+                
+                <!-- This is where the QR Code will show up -->
+                <div id="qrcode-container" style="margin-top: 20px; display: flex; justify-content: center;"></div>
+                
+                <textarea id="upiResult" readonly style="margin-top: 15px; width: 100%; height: 60px; display: none;"></textarea>
+            </div>
+        </div>
     </div>
 
-    <div class="card">
-        <h2>UPI Generator</h2>
-
-        <label>UPI ID</label>
-        <input type="text" id="upi" placeholder="example@upi">
-
-        <button onclick="generateUPI()">Generate UPI Link</button>
-
-        <textarea id="upiLink" rows="4" readonly></textarea>
-    </div>
-
-</div>
-
-<footer>
-    <p>© 2026 Receipt Splitter Project</p>
-</footer>
-
-<script src="script.js"></script>
-
+    <!-- This script loads the QR Code library from the internet -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
