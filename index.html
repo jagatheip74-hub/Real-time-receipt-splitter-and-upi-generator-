@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Receipt Splitter & UPI Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>💳 Real-Time Receipt Splitter & UPI Generator</h1>
+    <p>Split bills instantly and generate UPI payment links.</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Receipt Details</h2>
+
+        <label>Total Bill Amount (₹)</label>
+        <input type="number" id="billAmount" placeholder="Enter total bill">
+
+        <label>Number of People</label>
+        <input type="number" id="people" placeholder="Enter number of people">
+
+        <button onclick="splitBill()">Split Bill</button>
+
+        <h3 id="result"></h3>
+    </div>
+
+    <div class="card">
+        <h2>UPI Generator</h2>
+
+        <label>UPI ID</label>
+        <input type="text" id="upi" placeholder="example@upi">
+
+        <button onclick="generateUPI()">Generate UPI Link</button>
+
+        <textarea id="upiLink" rows="4" readonly></textarea>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Receipt Splitter Project</p>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
