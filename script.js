@@ -1,31 +1,41 @@
-function splitBill() {
-    let bill = parseFloat(document.getElementById("billAmount").value);
-    let people = parseInt(document.getElementById("people").value);
+document.getElementById('splitBtn').addEventListener('click', () => {
+    const totalAmount = parseFloat(document.getElementById('totalAmount').value);
+    const peopleCount = parseInt(document.getElementById('peopleCount').value);
+    const resultElement = document.getElementById('result');
 
-    if (isNaN(bill) || isNaN(people) || people <= 0) {
-        alert("Please enter a valid bill amount and number of people.");
+    if (isNaN(totalAmount) || isNaN(peopleCount) || peopleCount <= 0 || totalAmount <= 0) {
+        alert('Please enter valid positive numbers for amount and people.');
         return;
     }
 
-    let share = bill / people;
+    const share = (totalAmount / peopleCount).toFixed(2);
+    resultElement.innerText = `Each person should pay: ₹${share}`;
+});
 
-    document.getElementById("result").innerHTML =
-        "Each person should pay: ₹" + share.toFixed(2);
-}
+document.getElementById('generateUpiBtn').addEventListener('click', () => {
+    const upiId = document.getElementById('upiId').value;
+    const eachPayText = document.getElementById('result').innerText; 
+    const amount = eachPayText.replace(/[^0-9.]/g, ''); 
 
-function generateUPI() {
-    let upi = document.getElementById("upi").value;
-    let bill = parseFloat(document.getElementById("billAmount").value);
-    let people = parseInt(document.getElementById("people").value);
-
-    if (isNaN(bill) || isNaN(people) || people <= 0 || upi === "") {
-        alert("Please fill all fields first.");
+    if (!upiId || !amount) {
+        alert('Please calculate the split bill first and enter a valid UPI ID.');
         return;
     }
 
-    let share = (bill / people).toFixed(2);
+    const upiLink = `upi://pay?pa=${upiId}&pn=ReceiptSplitter&am=${amount}&cu=INR`;
+    
+    const resultBox = document.getElementById('upiResult');
+    resultBox.style.display = 'block';
+    resultBox.value = upiLink;
 
-    let link = `upi://pay?pa=${upi}&pn=ReceiptSplitter&am=${share}&cu=INR`;
+    const qrContainer = document.getElementById('qrcode-container');
+    qrContainer.innerHTML = '';
 
-    document.getElementById("upiLink").value = link;
-}
+    new QRCode(qrContainer, {
+        text: upiLink,
+        width: 180,
+        height: 180,
+        colorDark: "#000000",
+        colorLight: "#ffffff"
+    });
+});
